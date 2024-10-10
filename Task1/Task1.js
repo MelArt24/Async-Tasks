@@ -25,7 +25,7 @@ async function demoFunc() {
         });
     };
 
-    const results = await asyncMap(numbers, asyncDouble);
+    const results = await asyncMap(numbers, asyncTriple);
     console.log(results);
 }
 
