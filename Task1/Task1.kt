@@ -20,11 +20,11 @@ suspend fun <T, R> asyncMap(list: List<T>, callback: suspend (T) -> R): List<R> 
 fun main() = runBlocking {
     val numbers = listOf(1, 2, 3, 4, 5)
 
-    val asyncDouble: suspend (Int) -> Int = { num ->
+    val asyncTriple: suspend (Int) -> Int = { num ->
         delay(Random.nextLong(1000))
         num * 3
     }
 
-    val results = asyncMap(numbers, asyncDouble)
+    val results = asyncMap(numbers, asyncTriple)
     println(results)
 }
