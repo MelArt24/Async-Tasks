@@ -32,7 +32,7 @@ fun main() = runBlocking {
 
     val startTime = System.currentTimeMillis()
 
-    val results = asyncMap(numbers, asyncDouble)
+    val results = asyncMap(numbers, asyncDouble, 4000)
     println(results)
 
     val endTime = System.currentTimeMillis()
