@@ -20,13 +20,13 @@ async function asyncMap(array, callback, minExecutionTime = 5000) {
 async function demoFunc() {
     const numbers = [1, 2, 3, 4, 5];
 
-    const asyncDouble = async (num) => {
+    const asyncTriple = async (num) => {
         return new Promise((resolve) => {
             setTimeout(() => resolve(num * 3), 2000);
         });
     };
 
-    const results = await asyncMap(numbers, asyncDouble, 5000);
+    const results = await asyncMap(numbers, asyncTriple, 5000);
     console.log(results);
 
     const endTime = Date.now();
