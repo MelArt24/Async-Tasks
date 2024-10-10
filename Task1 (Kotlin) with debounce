@@ -1,16 +1,27 @@
 import kotlinx.coroutines.*
 import kotlin.system.measureTimeMillis
 
-// callback based async counterpart
-suspend fun <T, R> asyncMap(list: List<T>, callback: suspend (T) -> R): List<R> {
+suspend fun <T, R> asyncMap(
+    list: List<T>, 
+    callback: suspend (T) -> R,
+    minExecutionTime: Long = 4000
+    ): List<R> {
     val results = mutableListOf<R>()
+
     for (item in list) {
-        results.add(callback(item))
+        val callbackExecutionTime = measureTimeMillis {
+            results.add(callback(item))
+        }
+
+        if (callbackExecutionTime < minExecutionTime) {
+            val additionalDelay = minExecutionTime - callbackExecutionTime
+            delay(additionalDelay)
+        }
     }
+
     return results
 }
 
-// demo case for the usage
 fun main() = runBlocking {
     val numbers = listOf(1, 2, 3, 4, 5)
 
