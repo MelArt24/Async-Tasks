@@ -25,14 +25,14 @@ suspend fun <T, R> asyncMap(
 fun main() = runBlocking {
     val numbers = listOf(1, 2, 3, 4, 5)
 
-    val asyncDouble: suspend (Int) -> Int = { num ->
+    val asyncTriple: suspend (Int) -> Int = { num ->
         delay(1000)
         num * 3
     }
 
     val startTime = System.currentTimeMillis()
 
-    val results = asyncMap(numbers, asyncDouble, 4000)
+    val results = asyncMap(numbers, asyncTriple, 4000)
     println(results)
 
     val endTime = System.currentTimeMillis()
