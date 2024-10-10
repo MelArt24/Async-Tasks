@@ -21,7 +21,7 @@ async function demoFunc() {
 
     const asyncDouble = async (num) => {
         return new Promise((resolve) => {
-            setTimeout(() => resolve(num * 2), Math.random() * 1000);
+            setTimeout(() => resolve(num * 3), Math.random() * 1000);
         });
     };
 
