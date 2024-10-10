@@ -8,10 +8,10 @@ import kotlinx.coroutines.*
 import kotlin.random.Random
 
 // callback based async counterpart
-suspend fun <T, R> asyncMap(list: List<T>, transform: suspend (T) -> R): List<R> {
+suspend fun <T, R> asyncMap(list: List<T>, callback: suspend (T) -> R): List<R> {
     val results = mutableListOf<R>()
     for (item in list) {
-        results.add(transform(item))
+        results.add(callback(item))
     }
     return results
 }
