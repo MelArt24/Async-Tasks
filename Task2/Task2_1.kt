@@ -23,3 +23,4 @@ fun main() = runBlocking {
     
     val results = promiseMap(this, numbers, promiseTriple).await()
     println(results)
+}
