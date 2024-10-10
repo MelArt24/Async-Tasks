@@ -12,13 +12,13 @@ async function demoFunc() {
     // case 1
     const numbers = [1, 2, 3, 4, 5];
 
-    const promiseDouble = (num) => {
+    const promiseTriple = (num) => {
         return new Promise((resolve) => {
             setTimeout(() => resolve(num * 3), Math.random() * 1000);
         });
     };
 
-    promiseMap(numbers, promiseDouble)
+    promiseMap(numbers, promiseTriple)
         .then(results => {
             console.log(results);
         });
