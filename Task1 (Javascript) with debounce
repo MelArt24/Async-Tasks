@@ -1,3 +1,5 @@
+const start = Date.now();
+
 async function asyncMap(array, callback) {
     const results = [];
     for (const item of array) {
@@ -17,6 +19,10 @@ async function demoFunc() {
 
     const results = await asyncMap(numbers, asyncDouble);
     console.log(results);
+
+    const endTime = Date.now();
+    const elapsedTime = endTime - start;
+    console.log(`Program execution time: ${elapsedTime} ms`);
 }
 
 demoFunc();
