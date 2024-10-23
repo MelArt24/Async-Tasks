@@ -48,12 +48,12 @@ async function demoFunc() {
     };
     
     promiseMap(numbers2, promiseSquare)
-    .then(squares => {
-        console.log(squares);
-    });
-    .catch(error => {
-        console.error('Error in case 2:', error);
-    });
+        .then(squares => {
+            console.log(squares);
+        });
+        .catch(error => {
+            console.error('Error in case 2:', error);
+        });
 }
 
 demoFunc();
