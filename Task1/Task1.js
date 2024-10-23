@@ -9,7 +9,12 @@
 async function asyncMap(array, callback) {
     const results = [];
     for (const item of array) {
-        results.push(await callback(item));
+        try {
+            results.push(await callback(item));
+        } catch (error) {
+            console.error(`Error processing item ${item}:`, error);
+            results.push(null);
+        }
     }
     return results;
 }
@@ -20,8 +25,13 @@ async function demoFunc() {
     const numbers = [1, 2, 3, 4, 5];
 
     const asyncTriple = async (num) => {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve(num * 3), Math.random() * 1000);
+        setTimeout(() => {
+                if (Math.random() < 0.2) {
+                    reject(`Failed to process ${num}`);
+                } else {
+                    resolve(num * 3);
+                }
+            }, Math.random() * 1000);
         });
     };
 
