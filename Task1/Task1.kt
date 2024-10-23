@@ -11,7 +11,12 @@ import kotlin.random.Random
 suspend fun <T, R> asyncMap(list: List<T>, callback: suspend (T) -> R): List<R> {
     val results = mutableListOf<R>()
     for (item in list) {
-        results.add(callback(item))
+        try {
+            results.add(callback(item))
+        } catch (e: Exception) {
+            println("Error processing item $item: ${e.message}")
+            results.add(null)
+        }
     }
     return results
 }
@@ -22,6 +27,9 @@ fun main() = runBlocking {
 
     val asyncTriple: suspend (Int) -> Int = { num ->
         delay(Random.nextLong(1000))
+        if (Random.nextDouble() < 0.2) {
+            throw Exception("Failed to process $num")
+        }
         num * 3
     }
 
