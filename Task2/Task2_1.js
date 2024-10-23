@@ -12,7 +12,7 @@ async function demoFunc() {
     const numbers = [1, 2, 3, 4, 5];
 
     const promiseTriple = (num) => {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (num === 3) {
                     reject(`Error: Cannot process number ${num}`);
@@ -26,7 +26,7 @@ async function demoFunc() {
     promiseMap(numbers, promiseTriple)
         .then(results => {
             console.log(results);
-        });
+        })
         .catch(error => {
             console.error('Error in case 1:', error);
         });
@@ -36,7 +36,7 @@ async function demoFunc() {
     const numbers2 = [10, 20, 30];
 
     const promiseSquare = (num) => {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (num === 20) {
                     reject(`Error: Cannot process number ${num}`);
@@ -50,7 +50,7 @@ async function demoFunc() {
     promiseMap(numbers2, promiseSquare)
         .then(squares => {
             console.log(squares);
-        });
+        })
         .catch(error => {
             console.error('Error in case 2:', error);
         });
