@@ -5,7 +5,14 @@ import kotlinx.coroutines.*
 
 fun <T, R> promiseMap(scope: CoroutineScope, list: List<T>, callback: (T) -> Deferred<R>): Deferred<List<R>> {
     return scope.async {
-        list.map { callback(it).await() }
+        list.mapNotNull {
+            try {
+                callback(it).await()
+            } catch (e: Exception) {
+                println("ERROR! ${e.message}")
+                null
+            }
+        }
     }
 }
 
@@ -16,7 +23,11 @@ fun main() = runBlocking {
         CompletableDeferred<Int>().apply {
             launch {
                 delay(1000)
-                complete(num * 3)
+                if (num == 3) {
+                    completeExceptionally(Exception("Cannot process number $num"))
+                } else {
+                    complete(num * 3)
+                }
             }
         }
     }
