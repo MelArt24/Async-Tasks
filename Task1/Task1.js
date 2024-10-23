@@ -25,14 +25,15 @@ async function demoFunc() {
     const numbers = [1, 2, 3, 4, 5];
 
     const asyncTriple = async (num) => {
+     return new Promise((resolve, reject) => {
         setTimeout(() => {
-                if (Math.random() < 0.2) {
-                    reject(`Failed to process ${num}`);
-                } else {
-                    resolve(num * 3);
-                }
-            }, Math.random() * 1000);
-        });
+            if (Math.random() < 0.2) {
+                reject(`Failed to process ${num}`);
+            } else {
+                resolve(num * 3);
+            }
+        }, Math.random() * 1000);
+      });
     };
 
     const results = await asyncMap(numbers, asyncTriple);
