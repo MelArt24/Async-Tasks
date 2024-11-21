@@ -1,4 +1,4 @@
-function promiseMap(array, callback, signal) {
+function promiseMap(array, fn, signal) {
     const promises = array.map((item) => {
         if (signal.aborted) {
             return Promise.reject(new DOMException("Aborted", "AbortError"));
@@ -9,7 +9,7 @@ function promiseMap(array, callback, signal) {
 
             signal.addEventListener("abort", onAbort, { once: true }); // (eventType, callback, options) 
 
-            callback(item)
+            fn(item)
                 .then(resolve)
                 .catch(reject)
                 .finally(() => {
