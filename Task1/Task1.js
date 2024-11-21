@@ -12,16 +12,12 @@ function mapWithCallback(array, callback, finalCallback) {
 
     array.forEach((item, index) => {
         callback(item, (error, result) => {
-            try {
                 if (error) {
-                    throw new Error(`Error processing item ${item}: ${error}`);
+                 console.error(error.message);
+                 results[index] = null;
                 } else {
                     results[index] = result;
                 }
-            } catch (error) {
-                console.error(error.message);
-                results[index] = null;
-            }
 
             processed++;
             if (processed === array.length) {
