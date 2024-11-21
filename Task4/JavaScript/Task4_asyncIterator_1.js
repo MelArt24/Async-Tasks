@@ -2,7 +2,7 @@
 
 // without controller.abort();
 
-async function* asyncIterator(array) {
+async function* asyncGenerator(array) {
     for (const item of array) {
         yield new Promise((resolve) =>
             setTimeout(() => resolve(item), Math.random() * 1000)
@@ -32,7 +32,7 @@ async function demoFunc() {
     const promiseTriple = (num) => Promise.resolve(num * 3);
 
     try {
-        const iterable = asyncIterator(numbers);
+        const iterable = asyncGenerator(numbers);
         const results1 = await asyncMap(iterable, promiseTriple, signal);
         console.log("Case 1 results:", results1);
     } catch (err) {
