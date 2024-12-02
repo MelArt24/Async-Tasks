@@ -16,9 +16,18 @@ class Observable {
         this.observers.forEach(observer => observer.update(data));
     }
 
+    notifyError(error) {
+        this.observers.forEach(observer => observer.handleError(error));
+    }
+
     setTemperature(temp) {
-        console.log(`${this.name}: Температура змінена на ${temp}°C`);
-        this.notify(temp);
+        if (typeof temp !== 'number' || temp < -50 || temp > 50) {
+            const error = new Error(`Некоректна температура: ${temp}. Введіть значення від -50 до 50°C.`);
+            this.notifyError(error);
+        } else {
+            console.log(`${this.name}: Температура змінена на ${temp}°C`);
+            this.notify(temp);
+        }
     }
 }
 
@@ -29,6 +38,10 @@ class Observer {
 
     update(data) {
         console.log(`${this.name} отримав оновлення температури: ${data}°C`);
+    }
+
+    handleError(error) {
+        console.error(`${this.name} отримав помилку: ${error.message}`);
     }
 }
 
@@ -45,3 +58,5 @@ weatherStation.setTemperature(25);
 console.log()
 weatherStation.unsubscribe(desktopDisplay);
 weatherStation.setTemperature(30);
+console.log()
+weatherStation.setTemperature(52);
