@@ -44,5 +44,7 @@ weatherStation.on('error', error => {
 });
 
 weatherStation.setTemperature(25);
+console.log()
 weatherStation.setTemperature(30);
+console.log()
 weatherStation.setTemperature(52);
