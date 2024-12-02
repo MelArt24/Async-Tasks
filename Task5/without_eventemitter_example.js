@@ -1,6 +1,7 @@
 class Observable {
-    constructor() {
+    constructor(name) {
         this.observers = [];
+        this.name = name;
     }
 
     subscribe(observer) {
@@ -14,12 +15,9 @@ class Observable {
     notify(data) {
         this.observers.forEach(observer => observer.update(data));
     }
-}
 
-
-class WeatherStation extends Observable {
     setTemperature(temp) {
-        console.log(`Станція: Температура змінена на ${temp}°C`);
+        console.log(`${this.name}: Температура змінена на ${temp}°C`);
         this.notify(temp);
     }
 }
@@ -34,7 +32,7 @@ class Observer {
     }
 }
 
-const weatherStation = new WeatherStation();
+const weatherStation = new Observable("weatherStation");
 
 const phoneDisplay = new Observer("phoneDisplay");
 const desktopDisplay = new Observer("desktopDisplay");
