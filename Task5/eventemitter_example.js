@@ -7,7 +7,11 @@ class WeatherStation extends EventEmitter {
     }
 
     setTemperature(temp) {
-        this.emit('temperatureChange', temp);
+        if (typeof temp !== 'number' || temp < -50 || temp > 50) {
+            this.emit('error', new Error(`Некоректна температура: ${temp}. Введіть значення від -50 до 50°C.`));
+        } else {
+            this.emit('temperatureChange', temp);
+        }
     }
 }
 
@@ -35,6 +39,10 @@ const desktopDisplay = new DesktopDisplay();
 weatherStation.on('temperatureChange', temp => phoneDisplay.update(temp));
 weatherStation.on('temperatureChange', temp => desktopDisplay.update(temp));
 
+weatherStation.on('error', error => {
+    console.error(`Помилка: ${error.message}`);
+});
 
 weatherStation.setTemperature(25);
 weatherStation.setTemperature(30);
+weatherStation.setTemperature(52);
