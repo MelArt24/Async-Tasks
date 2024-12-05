@@ -8,7 +8,7 @@ class WeatherStation extends EventEmitter {
 
     setTemperature(temp) {
         if (typeof temp !== 'number' || temp < -50 || temp > 50) {
-            this.emit('error', new Error(`Некоректна температура: ${temp}. Введіть значення від -50 до 50°C.`));
+            this.emit('error', new Error(`Incorrect temperature: ${temp}. Enter a value from -50 to 50°C.`));
         } else {
             this.emit('temperatureChange', temp);
         }
@@ -18,14 +18,14 @@ class WeatherStation extends EventEmitter {
 
 class PhoneDisplay {
     update(temp) {
-        console.log(`Телефон: Температура змінена на ${temp}°C`);
+        console.log(`Smartphone: The temperature has changed by ${temp}°C`);
     }
 }
 
 
 class DesktopDisplay {
     update(temp) {
-        console.log(`Десктоп: Температура змінена на ${temp}°C`);
+        console.log(`Desktop: The temperature has changed by ${temp}°C`);
     }
 }
 
