@@ -22,10 +22,10 @@ class Observable {
 
     setTemperature(temp) {
         if (typeof temp !== 'number' || temp < -50 || temp > 50) {
-            const error = new Error(`Некоректна температура: ${temp}. Введіть значення від -50 до 50°C.`);
+            const error = new Error(`Incorrect temperature: ${temp}. Enter a value from -50 to 50°C.`);
             this.notifyError(error);
         } else {
-            console.log(`${this.name}: Температура змінена на ${temp}°C`);
+            console.log(`${this.name}: The temperature has changed by ${temp}°C`);
             this.notify(temp);
         }
     }
@@ -37,11 +37,11 @@ class Observer {
     }
 
     update(data) {
-        console.log(`${this.name} отримав оновлення температури: ${data}°C`);
+        console.log(`${this.name} got a temperature update: ${data}°C`);
     }
 
     handleError(error) {
-        console.error(`${this.name} отримав помилку: ${error.message}`);
+        console.error(`${this.name} got error: ${error.message}`);
     }
 }
 
