@@ -40,7 +40,7 @@ weatherStation.on('temperatureChange', temp => phoneDisplay.update(temp));
 weatherStation.on('temperatureChange', temp => desktopDisplay.update(temp));
 
 weatherStation.on('error', error => {
-    console.error(`Помилка: ${error.message}`);
+    console.error(`Error: ${error.message}`);
 });
 
 weatherStation.setTemperature(25);
